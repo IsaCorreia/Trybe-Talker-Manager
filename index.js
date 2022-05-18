@@ -14,7 +14,8 @@ app.get('/', (_request, response) => {
 });
 // ---------> NÃO REMOVER <---------
 
-app.use('/', require('./routes/index'));
+app.use('/', require('./routes/talker'));
+app.use('/', require('./routes/login'));
 
 app.listen(PORT, () => {
   console.log('Online at port', PORT);
