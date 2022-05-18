@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const error = require('./middlewares/error');
+
+const { HTTP_OK_STATUS } = require;
 
 const app = express();
 app.use(bodyParser.json());
 
-const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
 // ---------> NÃO REMOVER <---------
@@ -16,6 +18,8 @@ app.get('/', (_request, response) => {
 
 app.use('/', require('./routes/talker'));
 app.use('/', require('./routes/login'));
+
+app.use(error);
 
 app.listen(PORT, () => {
   console.log('Online at port', PORT);
