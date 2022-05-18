@@ -1,17 +1,12 @@
 const express = require('express');
+const crypto = require('crypto');
+const { HTTP_OK_STATUS } = require('../httpStatusCodes');
 
 const routes = express.Router();
 
-const HTTP_OK_STATUS = 200;
-const HTTP_NOT_FOUND_STATUS = 404;
-
 routes.post('/login', (req, res) => {
-  try {
-    const { email, password } = req.body;
-    res.status(HTTP_OK_STATUS).json({ email, password });
-  } catch (err) {
-    res.status(HTTP_NOT_FOUND_STATUS).json({ err });
-  }
+  const token = crypto.randomBytes(8).toString('hex');
+  res.status(HTTP_OK_STATUS).json({ token });
 });
 
 module.exports = routes;
