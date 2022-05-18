@@ -1,4 +1,4 @@
-const { verifyDataContent } = require('./verifyDataContent');
+const verifyDataContent = require('./verifyDataContent');
 
 module.exports = {
   verifyDataContent,
