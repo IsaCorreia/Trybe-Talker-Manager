@@ -16,7 +16,7 @@ const validateCredentials = (res, email, password) => {
   }
 };
 
-const auth = (req, res, next) => {
+const hasCredentials = (req, res, next) => {
   const { email, password } = req.body;
   if (!email) {
     return res
@@ -32,4 +32,4 @@ const auth = (req, res, next) => {
   next();
 };
 
-module.exports = auth;
+module.exports = hasCredentials;
