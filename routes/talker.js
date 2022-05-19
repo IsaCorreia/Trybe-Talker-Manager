@@ -1,6 +1,6 @@
 const express = require('express');
 const { readFileSync } = require('fs');
-const { checkNewTalkerInfo } = require('../middlewares/index');
+const { checkNewTalkerInfo, tokenAuth } = require('../middlewares/index');
 const {
   HTTP_OK_STATUS,
   HTTP_NOT_FOUND_STATUS,
@@ -27,7 +27,7 @@ routes.get('/talker/:id', (req, res) => {
   res.status(HTTP_OK_STATUS).json(chosenTalker);
 });
 
-routes.post('/talker', checkNewTalkerInfo, (req, res) => {
+routes.post('/talker', tokenAuth, checkNewTalkerInfo, (req, res) => {
   res.status(HTTP_CREATED_STATUS).json({ message: 'Palestrante adicionado' });
 });
 
