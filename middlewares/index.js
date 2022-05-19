@@ -1,5 +1,5 @@
-const verifyDataContent = require('./verifyDataContent');
+const error = require('./error');
 
 module.exports = {
-  verifyDataContent,
+  error,
 };
