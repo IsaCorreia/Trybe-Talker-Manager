@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const error = require('./middlewares/error');
+const { error } = require('./middlewares/index');
 
-const { HTTP_OK_STATUS } = require;
+const { HTTP_OK_STATUS } = require('./httpStatusCodes');
 
 const app = express();
 app.use(bodyParser.json());
