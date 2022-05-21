@@ -1,9 +1,22 @@
-const {
-  HTTP_BAD_REQUEST_STATUS,
-  HTTP_INTERNAL_ERROR_STATUS,
-} = require('../httpStatusCodes');
+const { HTTP_BAD_REQUEST_STATUS } = require('../httpStatusCodes');
 
-const validateCredentials = (res, email, password) => {
+const hasCredentials = (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email) {
+    return res
+      .status(HTTP_BAD_REQUEST_STATUS)
+      .json({ message: 'O campo "email" é obrigatório' });
+  }
+  if (!password) {
+    return res
+      .status(HTTP_BAD_REQUEST_STATUS)
+      .json({ message: 'O campo "password" é obrigatório' });
+  }
+  next();
+};
+
+const validateCredentials = (req, res, next) => {
+  const { email, password } = req.body;
   const EMAIL_MODEL = /@./;
   const PASSWORD_MODEL = /....../;
 
@@ -17,25 +30,7 @@ const validateCredentials = (res, email, password) => {
       message: 'O "password" deve ter pelo menos 6 caracteres',
     });
   }
-};
-
-const hasCredentials = (req, res, next) => {
-  const { email, password } = req.body;
-  try {
-    if (!email) {
-      return res.status(HTTP_BAD_REQUEST_STATUS)
-        .json({ message: 'O campo "email" é obrigatório' });
-    }
-    if (!password) {
-      return res.status(HTTP_BAD_REQUEST_STATUS)
-        .json({ message: 'O campo "password" é obrigatório' });
-    }
-    validateCredentials(res, email, password);
-  } catch (err) {
-    return res.status(HTTP_INTERNAL_ERROR_STATUS)
-      .json({ Erro_ao_logar: err.message });
-  }
   next();
 };
 
-module.exports = hasCredentials;
+module.exports = { hasCredentials, validateCredentials };

@@ -1,5 +1,5 @@
 const error = require('./error');
-const hasCredentials = require('./hasCredentials');
+const { hasCredentials, validateCredentials } = require('./hasCredentials');
 const {
   checkName,
   checkAge,
@@ -12,6 +12,7 @@ const tokenAuth = require('./tokenAuth');
 module.exports = {
   error,
   hasCredentials,
+  validateCredentials,
   checkName,
   checkAge,
   checkTalk,
