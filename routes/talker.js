@@ -1,8 +1,7 @@
 const express = require('express');
 const { readFileSync } = require('fs');
 const { checkNewTalkerInfo, tokenAuth } = require('../middlewares/index');
-const writeData = require('../utils/writeData.js');
-const deleteData = require('../utils/deleteData');
+const { writeData, deleteData } = require('../utils/utilsIndex');
 const {
   HTTP_OK_STATUS,
   HTTP_NOT_FOUND_STATUS,
