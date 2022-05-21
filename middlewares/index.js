@@ -3,6 +3,7 @@ const hasCredentials = require('./hasCredentials');
 const checkNewTalkerInfo = require('./checkNewTalkerInfo');
 const tokenAuth = require('./tokenAuth');
 const writeData = require('./writeData');
+const deleteData = require('./deleteData');
 
 module.exports = {
   error,
@@ -10,4 +11,5 @@ module.exports = {
   checkNewTalkerInfo,
   tokenAuth,
   writeData,
+  deleteData,
 };
