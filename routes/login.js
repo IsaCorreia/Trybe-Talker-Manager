@@ -1,6 +1,6 @@
 const express = require('express');
 const crypto = require('crypto');
-const { hasCredentials } = require('../middlewares/index');
+const { hasCredentials } = require('../middlewares/middlewaresIndex');
 const { HTTP_OK_STATUS } = require('../httpStatusCodes');
 
 const routes = express.Router();

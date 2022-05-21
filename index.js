@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { error } = require('./middlewares/index');
+const { error } = require('./middlewares/middlewaresIndex');
 
 const { HTTP_OK_STATUS } = require('./httpStatusCodes');
 

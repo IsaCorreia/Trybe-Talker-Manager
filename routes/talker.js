@@ -7,7 +7,7 @@ const {
   checkWatch,
   checkRate,
   tokenAuth,
-} = require('../middlewares/index');
+} = require('../middlewares/middlewaresIndex');
 const { writeData, deleteData } = require('../utils/utilsIndex');
 const {
   HTTP_OK_STATUS,
