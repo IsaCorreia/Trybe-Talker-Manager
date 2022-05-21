@@ -1,11 +1,21 @@
 const error = require('./error');
 const hasCredentials = require('./hasCredentials');
-const checkNewTalkerInfo = require('./checkNewTalkerInfo');
+const {
+  checkName,
+  checkAge,
+  checkTalk,
+  checkWatch,
+  checkRate,
+} = require('./checkNewTalkerInfo');
 const tokenAuth = require('./tokenAuth');
 
 module.exports = {
   error,
   hasCredentials,
-  checkNewTalkerInfo,
+  checkName,
+  checkAge,
+  checkTalk,
+  checkWatch,
+  checkRate,
   tokenAuth,
 };
