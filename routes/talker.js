@@ -1,8 +1,8 @@
 const express = require('express');
 const { readFileSync } = require('fs');
-// const { readFile } = require('fs').promises;
 const { checkNewTalkerInfo, tokenAuth } = require('../middlewares/index');
 const writeData = require('../utils/writeData.js');
+const deleteData = require('../utils/deleteData');
 const {
   HTTP_OK_STATUS,
   HTTP_NOT_FOUND_STATUS,
@@ -40,9 +40,10 @@ routes.post('/talker', tokenAuth, checkNewTalkerInfo, (req, res) => {
   res.status(HTTP_CREATED_STATUS).json(newTalker);
 });
 
-// routes.delete('/talker/:id', tokenAuth, deleteData, (req, res) => {
-//   const { id } = req.params;
-//   res.status(204).json({ message: `deleted ${id}` });
-// });
+routes.delete('/talker/:id', tokenAuth, (req, res) => {
+  const { id } = req.params;
+  deleteData(id);
+  res.status(204).json({ message: `deleted ${id}` });
+});
 
 module.exports = routes;
