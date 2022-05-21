@@ -1,4 +1,7 @@
-const { HTTP_BAD_REQUEST_STATUS } = require('../httpStatusCodes');
+const {
+  HTTP_BAD_REQUEST_STATUS,
+  HTTP_INTERNAL_ERROR_STATUS,
+} = require('../httpStatusCodes');
 
 const checkName = (res, name) => {
   if (name === undefined) {
@@ -65,9 +68,14 @@ const checkTalk = (res, talk) => {
 
 const checkNewTalkerInfo = (req, res, next) => {
   const { name, age, talk } = req.body;
-  checkName(res, name);
-  checkAge(res, age);
-  checkTalk(res, talk);
+  try {
+    checkName(res, name);
+    checkAge(res, age);
+    checkTalk(res, talk);
+  } catch (err) {
+    return res.status(HTTP_INTERNAL_ERROR_STATUS)
+      .json({ Erro_ao_Inserir: err.message });
+  }
 
   next();
 };
