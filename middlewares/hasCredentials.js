@@ -1,15 +1,15 @@
 const { HTTP_BAD_REQUEST_STATUS } = require('../httpStatusCodes');
 
 const validateCredentials = (res, email, password) => {
-  const validEmail = new RegExp(/@./);
-  const validPassword = new RegExp(/....../);
+  const EMAIL_MODEL = /@./;
+  const PASSWORD_MODEL = /....../;
 
-  if (!validEmail.test(email)) {
+  if (!EMAIL_MODEL.test(email)) {
     return res.status(HTTP_BAD_REQUEST_STATUS).json({
       message: 'O "email" deve ter o formato "email@email.com"',
     });
   }
-  if (!validPassword.test(password)) {
+  if (!PASSWORD_MODEL.test(password)) {
     return res.status(HTTP_BAD_REQUEST_STATUS).json({
       message: 'O "password" deve ter pelo menos 6 caracteres',
     });

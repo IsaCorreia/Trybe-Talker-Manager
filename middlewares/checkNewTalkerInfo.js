@@ -27,7 +27,7 @@ const checkAge = (res, age) => {
 };
 
 const checkWatch = (res, watchedAt) => {
-  const DATA_FORMAT = new RegExp(/[0-31]{2,2}\/[0-12]{2,2}\/[0-9999]{4,4}/);
+  const DATA_FORMAT = /(0[1-9]|[1-2]\d|3[0-1])\/(0[1-9]|1[0-2])\/([0-2]\d\d\d)/;
 
   if (!DATA_FORMAT.test(watchedAt)) {
     return res.status(HTTP_BAD_REQUEST_STATUS).json({
