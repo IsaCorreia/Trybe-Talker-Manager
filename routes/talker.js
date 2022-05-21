@@ -1,12 +1,8 @@
 const express = require('express');
 const { readFileSync } = require('fs');
-const { readFile } = require('fs').promises;
-const {
-  checkNewTalkerInfo,
-  tokenAuth,
-  writeData,
-  // deleteData,
-} = require('../middlewares/index');
+// const { readFile } = require('fs').promises;
+const { checkNewTalkerInfo, tokenAuth } = require('../middlewares/index');
+const writeData = require('../utils/writeData.js');
 const {
   HTTP_OK_STATUS,
   HTTP_NOT_FOUND_STATUS,
@@ -33,22 +29,16 @@ routes.get('/talker/:id', (req, res) => {
   res.status(HTTP_OK_STATUS).json(chosenTalker);
 });
 
-routes.post(
-  '/talker',
-  tokenAuth,
-  checkNewTalkerInfo,
-  writeData,
-  async (req, res) => {
-    const data = await readFile('talker.json', 'utf-8');
-    const talkers = JSON.parse(data);
-    const lastTalker = talkers[talkers.length - 1];
-    try {
-      res.status(HTTP_CREATED_STATUS).json(lastTalker);
-    } catch (err) {
-      console.log({ Erro: err.message });
-    }
-  },
-);
+routes.post('/talker', tokenAuth, checkNewTalkerInfo, (req, res) => {
+  const prevTalkers = readFileSync('talker.json', 'utf-8');
+  const newTalkersObj = JSON.parse(prevTalkers);
+  const newTalker = { ...req.body, id: newTalkersObj.length + 1 };
+  newTalkersObj.push(newTalker);
+  const newTalkersString = JSON.stringify(newTalkersObj);
+
+  writeData(newTalkersString);
+  res.status(HTTP_CREATED_STATUS).json(newTalker);
+});
 
 // routes.delete('/talker/:id', tokenAuth, deleteData, (req, res) => {
 //   const { id } = req.params;
