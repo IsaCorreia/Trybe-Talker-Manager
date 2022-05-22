@@ -6,7 +6,7 @@ const writeData = (data) => {
       if (err) throw err;
     });
   } catch (err) {
-    console.log({ Erro_ao_escrever: err.message });
+    throw Error({ Erro_ao_escrever: err.message });
   }
 };
 

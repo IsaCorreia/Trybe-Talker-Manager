@@ -9,7 +9,7 @@ const deleteData = (id) => {
     const filteredTalkersSting = JSON.stringify(filteredTalkers);
     writeData(filteredTalkersSting);
   } catch (err) {
-    console.log({ Erro_ao_deletar: err.message });
+    throw Error({ Erro_ao_deletar: err.message });
   }
 };
 
