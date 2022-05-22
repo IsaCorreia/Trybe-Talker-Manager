@@ -8,7 +8,7 @@ const {
   checkRate,
   tokenAuth,
 } = require('../middlewares/middlewaresIndex');
-const { writeData, deleteData } = require('../utils/utilsIndex');
+const { writeData, deleteData, editData } = require('../utils/utilsIndex');
 const {
   HTTP_OK_STATUS,
   HTTP_NOT_FOUND_STATUS,
@@ -60,5 +60,20 @@ routes.delete('/talker/:id', tokenAuth, (req, res) => {
   deleteData(id);
   res.status(204).json({ message: `deleted ${id}` });
 });
+
+routes.put(
+  '/talker/:id',
+  tokenAuth,
+  checkName,
+  checkAge,
+  checkTalk,
+  checkWatch,
+  checkRate,
+  (req, res) => {
+    const { id } = req.params;
+    editData(id, req.body);
+    res.status(HTTP_OK_STATUS).json({ message: 'ok!' });
+  },
+);
 
 module.exports = routes;
