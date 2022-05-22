@@ -85,7 +85,7 @@ routes.put(
   checkRate,
   async (req, res) => {
     const { id } = req.params;
-    editData(id, req.body);
+    await editData(id, req.body);
     const newData = await readData();
     res.status(HTTP_OK_STATUS).json(newData);
   },
