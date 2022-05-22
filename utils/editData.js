@@ -1,14 +1,13 @@
 const readData = require('./readData');
+const writeData = require('./writeData');
 
 const editData = async (id, data) => {
   const prevTalkers = await readData();
-  const chosenTalker = prevTalkers.filter((talker) => +talker.id === +id);
-  console.log({
-    request_id: id,
-    request_data: data,
-    stored_data: prevTalkers,
-    chosen_talker: chosenTalker,
-  });
+  const newTalker = { ...data, id: prevTalkers.length };
+  const newTalkersString = JSON.stringify(
+    prevTalkers.map((talker) => (+talker.id === +id ? newTalker : talker)),
+  );
+  writeData(newTalkersString);
 };
 
 module.exports = editData;

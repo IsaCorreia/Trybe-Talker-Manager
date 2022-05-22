@@ -83,10 +83,11 @@ routes.put(
   checkTalk,
   checkWatch,
   checkRate,
-  (req, res) => {
+  async (req, res) => {
     const { id } = req.params;
     editData(id, req.body);
-    res.status(HTTP_OK_STATUS).json({ message: 'ok!' });
+    const newData = await readData();
+    res.status(HTTP_OK_STATUS).json(newData);
   },
 );
 
