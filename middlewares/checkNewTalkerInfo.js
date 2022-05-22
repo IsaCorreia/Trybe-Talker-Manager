@@ -43,7 +43,7 @@ const checkTalk = (req, res, next) => {
 
 const checkRate = (req, res, next) => {
   const { rate } = req.body.talk;
-  if (!rate) {
+  if (!rate && rate !== 0) {
     return res.status(HTTP_BAD_REQUEST_STATUS).json({
       message:
         'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios',
