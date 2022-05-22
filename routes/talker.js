@@ -8,7 +8,13 @@ const {
   checkRate,
   tokenAuth,
 } = require('../middlewares/middlewaresIndex');
-const { writeData, deleteData, editData } = require('../utils/utilsIndex');
+const {
+  writeData,
+  deleteData,
+  editData,
+  readData,
+  searchTalker,
+} = require('../utils/utilsIndex');
 const {
   HTTP_OK_STATUS,
   HTTP_NOT_FOUND_STATUS,
@@ -20,6 +26,14 @@ const routes = express.Router();
 routes.get('/talker', (req, res) => {
   const data = JSON.parse(readFileSync('talker.json', 'utf-8'));
   res.status(HTTP_OK_STATUS).json(data);
+});
+
+routes.get('/talker/search', tokenAuth, async (req, res) => {
+  const { q } = req.query;
+  if (!q || q === '') res.status(HTTP_OK_STATUS).json(readData());
+
+  const chosenTalker = await searchTalker(q);
+  res.status(HTTP_OK_STATUS).json(chosenTalker);
 });
 
 routes.get('/talker/:id', (req, res) => {
